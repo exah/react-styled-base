@@ -1,0 +1,115 @@
+{
+  "name": "@exah/react-base-component",
+  "version": "0.0.0",
+  "description": "",
+  "author": "John Grishin <hi@johngrish.in>",
+  "license": "MIT",
+  "repository": "exah/react-base-component",
+  "sideEffects": false,
+  "main": "cjs/index.js",
+  "module": "esm/index.js",
+  "files": [
+    "./esm",
+    "./cjs",
+    "./src"
+  ],
+  "tags": [
+    "components",
+    "pss",
+    "react"
+  ],
+  "scripts": {
+    "build": "run-s build:*",
+    "build:esm": "cross-env NODE_ENV=production babel src -d esm",
+    "build:cjs": "cross-env NODE_ENV=production MODULES=cjs babel src -d cjs",
+    "prebuild": "npm run cleanup",
+    "watch": "run-p \"build:* -- -w\" \"test:unit -- -w\"",
+    "prewatch": "npm run cleanup",
+    "test": "run-s test:*",
+    "test:unit": "ava test",
+    "test:lint": "eslint src test",
+    "deploy": "np --no-cleanup",
+    "cleanup": "rimraf cjs esm dist",
+    "version": "auto-changelog -p && git add CHANGELOG.md",
+    "preversion": "npm run build",
+    "precommit": "lint-staged",
+    "prepush": "npm test"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "lint-staged": {
+    "./src/**/*.js": "eslint",
+    "./test/**/*.js": "eslint"
+  },
+  "browserslist": [
+    "> 1%"
+  ],
+  "eslintConfig": {
+    "parser": "babel-eslint",
+    "extends": [
+      "standard",
+      "standard-react"
+    ],
+    "rules": {
+      "no-shadow": 2,
+      "react/prop-types": 0
+    }
+  },
+  "auto-changelog": {
+    "commitLimit": 10,
+    "template": ".changelog.hbs"
+  },
+  "ava": {
+    "verbose": true,
+    "require": [
+      "@babel/register"
+    ],
+    "babel": {
+      "testOptions": {
+        "extends": "./babel.config.js"
+      }
+    }
+  },
+  "peerDependencies": {
+    "prop-types": "^15.0.0",
+    "react": "^16.0.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.1.0",
+    "@babel/core": "^7.1.0",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/plugin-transform-runtime": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/register": "^7.0.0",
+    "auto-changelog": "^1.8.0",
+    "ava": "^1.0.0-beta.8",
+    "babel-eslint": "^10.0.1",
+    "cross-env": "5.2.0",
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.7.0",
+    "eslint": "^5.6.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-config-standard-react": "^7.0.2",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^8.0.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-react": "^7.11.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "husky": "^1.1.3",
+    "lint-staged": "^8.0.4",
+    "np": "3.0.4",
+    "npm-run-all": "^4.1.3",
+    "prop-types": "^15.6.2",
+    "react": "^16.5.2",
+    "react-dom": "^16.6.1",
+    "rimraf": "^2.6.2"
+  },
+  "dependencies": {
+    "@babel/runtime": "7",
+    "@exah/utils": "^1.5",
+    "fast-memoize": "^2.5.1"
+  }
+}
