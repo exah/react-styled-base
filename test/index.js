@@ -47,9 +47,30 @@ test('ignore prop not valid for this tag', t => {
   t.is(tree.html(), '<span></span>')
 })
 
+const CutsomComp = (props) => <div {...props} />
+
 test('override tag name for custom components', t => {
-  const CutsomComp = (props) => <div {...props} />
-  const tree = shallow(<Base as={CutsomComp} value='foo' tagNameForComponent='input' />)
+  const tree = shallow(<Base as={CutsomComp} asTagName='input' value='foo' foo='bar' />)
 
   t.is(tree.html(), '<div value="foo"></div>')
+})
+
+test('do not filter props for custom components', t => {
+  const tree = shallow(<Base as={CutsomComp} value='foo' foo='bar' />)
+
+  t.is(tree.html(), '<div value="foo" foo="bar"></div>')
+})
+
+test('create base inside `as` prop', t => {
+  const tree = shallow(
+    <Base
+      as={createBase(CutsomComp, { tagName: 'a', whitelist: [ 'to' ] })}
+      href='foo'
+      to='bar'
+      value='baz'
+      a='foo-bar-baz'
+    />
+  )
+
+  t.is(tree.html(), '<div href="foo" to="bar"></div>')
 })

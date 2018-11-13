@@ -3,6 +3,16 @@ import PropTypes from 'prop-types'
 import { isStr, filterObj } from '@exah/utils'
 import { isPropValid } from './is-prop-valid'
 
+const ReactComponentPropType = PropTypes.oneOfType([
+  PropTypes.string,
+  PropTypes.func,
+  // Special react hocs: `forwardRef`, `memo`
+  PropTypes.shape({
+    $$typeof: PropTypes.symbol.isRequired,
+    render: PropTypes.func.isRequired
+  })
+])
+
 function defaultFilterPropsFn (fn, tagName, props) {
   if (tagName == null) return props
   return filterObj((propName) => fn(propName, tagName), props)
@@ -15,14 +25,14 @@ function createBase (defaultComp = 'div', options = {}) {
   const {
     componentProp = 'as',
     filterPropsFn = defaultFilterPropsFn,
-    tagNameForComponent,
+    tagName: defaultTagName,
     ...filterOptions
   } = options
 
   const filterFn = isPropValid(filterOptions)
 
-  function BaseComponent ({ [componentProp]: Comp, ...rest }, ref) {
-    const tagName = isStr(Comp) ? Comp : rest.tagNameForComponent
+  function BaseComponent ({ [componentProp]: Comp, asTagName, ...rest }, ref) {
+    const tagName = isStr(Comp) ? Comp : asTagName
 
     return (
       <Comp ref={ref} {...filterPropsFn(filterFn, tagName, rest)} />
@@ -33,11 +43,11 @@ function createBase (defaultComp = 'div', options = {}) {
     displayName: `Base(${getDisplayName(defaultComp)})`,
     defaultProps: {
       [componentProp]: defaultComp,
-      tagNameForComponent
+      asTagName: defaultTagName
     },
     propTypes: {
-      [componentProp]: PropTypes.oneOfType([ PropTypes.string, PropTypes.func ]),
-      tagNameForComponent: PropTypes.string
+      [componentProp]: ReactComponentPropType,
+      asTagName: PropTypes.string
     }
   })
 }
