@@ -49,7 +49,7 @@ test('ignore prop not valid for this tag', t => {
 
 test('override tag name for custom components', t => {
   const CutsomComp = (props) => <div {...props} />
-  const tree = shallow(<Base as={CutsomComp} value='foo' filterPropsForTagName='input' />)
+  const tree = shallow(<Base as={CutsomComp} value='foo' tagNameForComponent='input' />)
 
   t.is(tree.html(), '<div value="foo"></div>')
 })

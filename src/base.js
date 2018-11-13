@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { isStr, filterObj } from '@exah/utils'
 import { isPropValid } from './is-prop-valid'
 
-function filterProps (fn, tagName, props) {
+function defaultFilterPropsFn (fn, tagName, props) {
   if (tagName == null) return props
   return filterObj((propName) => fn(propName, tagName), props)
 }
@@ -11,26 +11,33 @@ function filterProps (fn, tagName, props) {
 const getDisplayName = (comp) =>
   (isStr(comp) ? comp : comp.displayName) || 'Component'
 
-function createBase (defaultComp = 'div', { propName = 'as', ...filterOptions } = {}) {
+function createBase (defaultComp = 'div', options = {}) {
+  const {
+    componentProp = 'as',
+    filterPropsFn = defaultFilterPropsFn,
+    tagNameForComponent,
+    ...filterOptions
+  } = options
+
   const filterFn = isPropValid(filterOptions)
 
-  function BaseComponent (props, ref) {
-    const { [propName]: Comp, filterPropsForTagName, ...rest } = props
-    const tagName = isStr(Comp) ? Comp : filterPropsForTagName
+  function BaseComponent ({ [componentProp]: Comp, ...rest }, ref) {
+    const tagName = isStr(Comp) ? Comp : rest.tagNameForComponent
 
     return (
-      <Comp ref={ref} {...filterProps(filterFn, tagName, rest)} />
+      <Comp ref={ref} {...filterPropsFn(filterFn, tagName, rest)} />
     )
   }
 
   return Object.assign(React.forwardRef(BaseComponent), {
     displayName: `Base(${getDisplayName(defaultComp)})`,
     defaultProps: {
-      [propName]: defaultComp
+      [componentProp]: defaultComp,
+      tagNameForComponent
     },
     propTypes: {
-      [propName]: PropTypes.oneOfType([ PropTypes.string, PropTypes.func ]),
-      filterPropsForTagName: PropTypes.string
+      [componentProp]: PropTypes.oneOfType([ PropTypes.string, PropTypes.func ]),
+      tagNameForComponent: PropTypes.string
     }
   })
 }
