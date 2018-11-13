@@ -10,8 +10,8 @@ const isHtmlProp = (propName, tagName) => (
   )
 )
 
-function isPropValid ({ whitelist = [], blacklist = [] } = {}) {
-  const checkFn = (propName, tagName) => (
+function createIsPropValid ({ whitelist = [], blacklist = [] } = {}) {
+  const checkFn = (tagName, propName) => (
     (whitelist.includes(propName) && !blacklist.includes(propName)) ||
     isReactProp(propName) ||
     isHtmlProp(propName, tagName)
@@ -20,6 +20,9 @@ function isPropValid ({ whitelist = [], blacklist = [] } = {}) {
   return memoize(checkFn)
 }
 
+const isPropValid = createIsPropValid()
+
 export {
+  createIsPropValid,
   isPropValid
 }

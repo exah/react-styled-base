@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { isStr, filterObj } from '@exah/utils'
-import { isPropValid } from './is-prop-valid'
+import { createIsPropValid } from './is-prop-valid'
 
 const ReactComponentPropType = PropTypes.oneOfType([
   PropTypes.string,
@@ -15,7 +15,7 @@ const ReactComponentPropType = PropTypes.oneOfType([
 
 function defaultFilterPropsFn (fn, tagName, props) {
   if (tagName == null) return props
-  return filterObj((propName) => fn(propName, tagName), props)
+  return filterObj((propName, propValue) => fn(tagName, propName, propValue), props)
 }
 
 const getDisplayName = (comp) =>
@@ -29,7 +29,7 @@ function createBase (defaultComp = 'div', options = {}) {
     ...filterOptions
   } = options
 
-  const filterFn = isPropValid(filterOptions)
+  const filterFn = createIsPropValid(filterOptions)
 
   function BaseComponent ({ [componentProp]: Comp, asTagName, ...rest }, ref) {
     const tagName = isStr(Comp) ? Comp : asTagName
@@ -52,7 +52,7 @@ function createBase (defaultComp = 'div', options = {}) {
   })
 }
 
-const Base = createBase('div')
+const Base = createBase()
 
 export {
   Base,
