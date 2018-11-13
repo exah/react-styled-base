@@ -30,7 +30,7 @@ import Base from '@exah/react-base-component'
 - `as: Component` — React component or DOM element (like `div`, `input`, `span`, ...), default `div`
 - `asTagName: string` - DOM element used when React component passed to `as` prop 
 
-See [`createBase`](#create-base) for more options.
+See [`createBase`](#createbase-factory) for more options.
 
 
 #### Example
@@ -55,9 +55,7 @@ render((
 ```
 
 
-<span id="create-base">
 ### `createBase` factory
-</span>
 
 ```js
 import { createBase } from '@exah/react-base-component'
