@@ -15,7 +15,7 @@ const ReactComponentPropType = PropTypes.oneOfType([
 
 function defaultFilterPropsFn (fn, tagName, props) {
   if (tagName == null) return props
-  return filterObj((propName, propValue) => fn(tagName, propName, propValue), props)
+  return filterObj((propName) => fn(tagName, propName), props)
 }
 
 const getDisplayName = (comp) =>
