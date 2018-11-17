@@ -1,4 +1,3 @@
-import memoize from 'fast-memoize'
 import htmlAttributes from '../data/html-attributes.json'
 
 const REACT_PROPS_REGEXP = /^((children)|(on[A-Z].*)|((data|aria)-.*))$/
@@ -10,6 +9,20 @@ const isHtmlProp = (propName, tagName) => (
   )
 )
 
+function simpleMemoize (fn) {
+  const cache = {}
+
+  return (a, b) => {
+    const key = a + b
+
+    if (cache[key] === undefined) {
+      cache[key] = fn(a, b)
+    }
+
+    return cache[key]
+  }
+}
+
 function createIsPropValid ({ whitelist = [], blacklist = [] } = {}) {
   const checkFn = (tagName, propName) => (
     (whitelist.includes(propName) && !blacklist.includes(propName)) ||
@@ -17,7 +30,7 @@ function createIsPropValid ({ whitelist = [], blacklist = [] } = {}) {
     isHtmlProp(propName, tagName)
   )
 
-  return memoize(checkFn)
+  return simpleMemoize(checkFn)
 }
 
 const isPropValid = createIsPropValid()

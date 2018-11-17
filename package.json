@@ -110,7 +110,6 @@
   },
   "dependencies": {
     "@babel/runtime": "7",
-    "@exah/utils": "^1.5",
-    "fast-memoize": "^2"
+    "@exah/utils": "^1.5"
   }
 }
