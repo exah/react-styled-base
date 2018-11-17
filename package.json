@@ -9,6 +9,7 @@
   "main": "cjs/index.js",
   "module": "esm/index.js",
   "files": [
+    "./data",
     "./esm",
     "./cjs",
     "./src"
@@ -20,8 +21,8 @@
   ],
   "scripts": {
     "build": "run-s build:*",
-    "build:esm": "cross-env NODE_ENV=production babel -D src -d esm",
-    "build:cjs": "cross-env NODE_ENV=production MODULES=cjs babel -D src -d cjs",
+    "build:esm": "cross-env NODE_ENV=production babel src -d esm",
+    "build:cjs": "cross-env NODE_ENV=production MODULES=cjs babel src -d cjs",
     "prebuild": "npm run cleanup",
     "watch": "run-p \"build:* -- -w\" \"test:unit -- -w\"",
     "prewatch": "npm run cleanup",

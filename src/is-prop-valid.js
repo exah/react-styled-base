@@ -1,5 +1,5 @@
 import memoize from 'fast-memoize'
-import htmlAttributes from './html-attributes.json'
+import htmlAttributes from '../data/html-attributes.json'
 
 const REACT_PROPS_REGEXP = /^((children)|(on[A-Z].*)|((data|aria)-.*))$/
 
