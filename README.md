@@ -138,6 +138,7 @@ isPropValid('a', 'href') // → true
 - ⚠️ [Unknown Prop Warning](https://reactjs.org/warnings/unknown-prop.html)
 - 💄 [`pss`](https://github.com/exah/pss) — Prop Styles System
 - 📐 [`pss-components`](https://github.com/exah/components) — Components
+- 👩‍🎤 [`@emotion/is-prop-valid`](https://github.com/emotion-js/next/tree/master/packages/is-prop-valid) — Inspired by
 
 ---
 
