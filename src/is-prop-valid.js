@@ -15,7 +15,7 @@ function simpleMemoize (fn) {
   return (a, b) => {
     const key = a + b
 
-    if (cache[key] === undefined) {
+    if (!cache.hasOwnProperty(key)) {
       cache[key] = fn(a, b)
     }
 

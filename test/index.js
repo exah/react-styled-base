@@ -2,7 +2,7 @@ import './_helpers'
 import test from 'ava'
 import { shallow } from 'enzyme'
 import React from 'react'
-import { Base, createBase } from '../src'
+import { Base, createBase, isPropValid } from '../src'
 
 test('render div', t => {
   const tree = shallow(<Base />)
@@ -53,6 +53,11 @@ test('override tag name for custom components', t => {
   const tree = shallow(<Base as={CutsomComp} asTagName='input' value='foo' foo='bar' />)
 
   t.is(tree.html(), '<div value="foo"></div>')
+})
+
+test('multiple calls to isPropValid are memoized', t => {
+  t.true(isPropValid('a', 'href'))
+  t.true(isPropValid('a', 'href'))
 })
 
 test('do not filter props for custom components', t => {
