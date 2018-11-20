@@ -66,7 +66,7 @@ test('do not filter props for custom components', t => {
   t.is(tree.html(), '<div value="foo" foo="bar"></div>')
 })
 
-test('create base inside `as` prop', t => {
+test('createBase inside `as` prop', t => {
   const tree = shallow(
     <Base
       as={createBase(CutsomComp, { tagName: 'a', whitelist: [ 'to' ] })}
@@ -78,4 +78,16 @@ test('create base inside `as` prop', t => {
   )
 
   t.is(tree.html(), '<div href="foo" to="bar"></div>')
+})
+
+test('custom filter inside createBase ', t => {
+  const Comp = createBase((props) => <span {...props} />, {
+    isPropValid: (tag, prop) => prop !== 'foo'
+  })
+
+  const tree = shallow(
+    <Comp foo='bar' title='baz' />
+  )
+
+  t.is(tree.html(), '<span title="baz"></span>')
 })

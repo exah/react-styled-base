@@ -5,6 +5,5 @@ export {
 } from './base'
 
 export {
-  createIsPropValid,
   isPropValid
 } from './is-prop-valid'
