@@ -31,7 +31,6 @@ import Base from '@exah/react-base-component'
 #### Props
 
 - `as: Component` — React component or DOM element (like `div`, `input`, `span`, ...), default `div`
-- `asTagName: string` - DOM element used when React component passed to `as` prop 
 
 See [`createBase`](#createbase-factory) for more options.
 
@@ -116,7 +115,7 @@ render((
 // <span>
 //   <a class="css-0" href="/app/page-2">Page 2</a>
 //   <a class="css-1" href="https://google.com" target="_blank">Search</a>
-//   <span class="css-1" title="notice">Notice</span>
+//   <span title="notice">Notice</span>
 // </span>
 ```
 
