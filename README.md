@@ -1,4 +1,4 @@
-# ⚾️ react-base-component
+# react-styled-base
 
 > Base component that prevents rendering unknown props in DOM
 
@@ -7,15 +7,14 @@
 - [x] Based on [`react-html-attributes`](https://www.npmjs.com/package/react-html-attributes) (50% smaller - 3kb when minified /  1kb gziped, without many svg attributes and event handlers)
 - [x] Override inner element with `as` prop
 - [x] Great for CSS-in-JS component libraries (NOTE: some provide this feature out of box!)
-- [ ] Light version with only custom whitelist / blacklist (soon)
-- [ ] Better package name (open for discussion)
 - [ ] Remove old and deprecated html attributes (open for discussion)
+- [ ] Light version with only custom whitelist / blacklist (soon)
 
 
 ## 📦 Install
 
 ```sh
-$ yarn add @exah/react-base-component
+$ yarn add react-styled-base
 ```
 
 
@@ -24,7 +23,7 @@ $ yarn add @exah/react-base-component
 ### `Base` component
 
 ```js
-import Base from '@exah/react-base-component'
+import Base from 'react-styled-base'
 ```
 
 
@@ -40,7 +39,7 @@ See [`createBase`](#createbase-factory) for more options.
 ```js
 import { render } from 'react-dom'
 import styled from 'react-emotion'
-import Base from '@exah/react-base-component'
+import Base from 'react-styled-base'
 
 const LinkComp = styled(Base)`
   color: ${props => props.foo === 'bar' ? 'royalblue' : 'hotpink'};
@@ -60,18 +59,18 @@ render((
 ### `createBase` factory
 
 ```js
-import { createBase } from '@exah/react-base-component'
+import { createBase } from 'react-styled-base'
 ```
 
 #### Params
 
 - `defaultComp: Component` — React component or DOM element (like `div`, `input`, `span`, ...), default `div`
-- `options: Object` — Options, optional, default to `{ componentProp: 'as' }`
-- `options.whitelist: Array` — List of props that always will be rendered, optional
-- `options.blacklist: Array` — List of props that always be be omitted, optional
-- `options.isPropValid: function (tagName, propName) => boolean` — Custom function to filter props
-- `options.tagName: string` — DOM element. Used when `defaultComp` is not DOM element, optional
-- `options.componentProp: string` — Name of prop for changing underlying component, optional, default to `'as'`
+- `options: Object` — (Optional, default to `{ componentProp: 'as' }`)
+    + `options.whitelist: Array` — List of props that always will be rendered (optional)
+    + `options.blacklist: Array` — List of props that always be be omitted (optional)
+    + `options.isPropValid: function (tagName, propName) => boolean` — Custom function to filter props
+    + `options.tagName: string` — DOM element. Used when `defaultComp` is not DOM element (optional)
+    + `options.componentProp: string` — Name of prop for changing underlying component (optional, default to `'as'`)
 
 **Return: `Component`** — wrapped in `React.forwardRef`.
 
@@ -82,7 +81,7 @@ import { createBase } from '@exah/react-base-component'
 import { render } from 'react-dom'
 import styled from 'react-emotion'
 import { Link as RouterLink } from 'react-router-dom'
-import { createBase } from '@exah/react-base-component'
+import { createBase } from 'react-styled-base'
 
 const LinkComp = styled(createBase('span'))`
   color: ${props => props.foo === 'bar' ? 'royalblue' : 'hotpink'};
@@ -123,7 +122,7 @@ render((
 ### `isPropValid` function
 
 ```js
-import { isPropValid } from '@exah/react-base-component'
+import { isPropValid } from 'react-styled-base'
 ```
 
 
@@ -138,19 +137,25 @@ import { isPropValid } from '@exah/react-base-component'
 #### Example
 
 ```js
-import { isPropValid } from '@exah/react-base-component'
+import { isPropValid } from 'react-styled-base'
 
 isPropValid('a', 'foo') // → false
 isPropValid('a', 'bar') // → false
 isPropValid('a', 'href') // → true
 ```
 
+## 💁‍♂️ Alternative
+
+- [`clean-element`](https://github.com/jxnblk/styled-system/tree/master/packages/clean-element) — Use component prop-types as blacklist
+
 ## 🔗 Links
 
 - ⚠️ [Unknown Prop Warning](https://reactjs.org/warnings/unknown-prop.html)
+- 💬 [Separate HTML attributes from styling props](https://github.com/styled-components/styled-components/issues/439)
 - 💄 [`pss`](https://github.com/exah/pss) — Prop Styles System
 - 📐 [`pss-components`](https://github.com/exah/components) — Components
-- 👩‍🎤 [`@emotion/is-prop-valid`](https://github.com/emotion-js/next/tree/master/packages/is-prop-valid) — Inspired by
+- 💄 [`glamorous`](https://github.com/paypal/glamorous) — Inspired by
+- 👩‍🎤 [`@emotion/is-prop-valid`](https://github.com/emotion-js/next/tree/master/packages/is-prop-valid) — Approach used inside `emotion` and `styled-components`
 
 ---
 
