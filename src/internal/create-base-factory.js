@@ -25,7 +25,7 @@ export function createBaseFactory (createFilter) {
   return function createBase (defaultComp = DEFAULT_ELEMENT, options = {}) {
     const {
       componentProp = DEFAULT_PROP_NAME,
-      tagName: defaultTagName,
+      tagName: compTagName,
       whitelist,
       blacklist,
       isPropValid: customFilter
@@ -34,8 +34,8 @@ export function createBaseFactory (createFilter) {
     const isCustomFilter = isFn(customFilter)
     const filter = isCustomFilter ? customFilter : createFilter({ whitelist, blacklist })
 
-    function BaseComponent ({ [componentProp]: Comp, asTagName, ...rest }, ref) {
-      const tagName = isStr(Comp) ? Comp : asTagName
+    function BaseComponent ({ [componentProp]: Comp, ...rest }, ref) {
+      const tagName = isStr(Comp) ? Comp : compTagName
 
       return (
         <Comp ref={ref} {...filterProps(filter, tagName, rest, isCustomFilter)} />
@@ -45,12 +45,10 @@ export function createBaseFactory (createFilter) {
     return Object.assign(React.forwardRef(BaseComponent), {
       displayName: `Base(${getDisplayName(defaultComp)})`,
       defaultProps: {
-        [componentProp]: defaultComp,
-        asTagName: defaultTagName
+        [componentProp]: defaultComp
       },
       propTypes: {
-        [componentProp]: ReactComponentPropType,
-        asTagName: PropTypes.string
+        [componentProp]: ReactComponentPropType
       }
     })
   }

@@ -1,8 +1,10 @@
-import './_helpers'
 import test from 'ava'
-import { shallow } from 'enzyme'
 import React from 'react'
+import { shallow, configure } from 'enzyme'
+import Adapter from 'enzyme-adapter-react-16'
 import { Base, createBase, isPropValid } from '../src'
+
+configure({ adapter: new Adapter() })
 
 test('render div', t => {
   const tree = shallow(<Base />)
@@ -50,7 +52,7 @@ test('ignore prop not valid for this tag', t => {
 const CutsomComp = (props) => <div {...props} />
 
 test('override tag name for custom components', t => {
-  const tree = shallow(<Base as={CutsomComp} asTagName='input' value='foo' foo='bar' />)
+  const tree = shallow(<Base as={createBase(CutsomComp, { tagName: 'input' })} value='foo' foo='bar' />)
 
   t.is(tree.html(), '<div value="foo"></div>')
 })
