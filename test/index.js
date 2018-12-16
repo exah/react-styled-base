@@ -93,3 +93,13 @@ test('custom filter inside createBase ', t => {
 
   t.is(tree.html(), '<span title="baz"></span>')
 })
+
+test('blacklist ', t => {
+  const Comp = createBase('img', { blacklist: [ 'width' ] })
+
+  const tree = shallow(
+    <Comp width={1 / 2} />
+  )
+
+  t.is(tree.html(), '<img/>')
+})
