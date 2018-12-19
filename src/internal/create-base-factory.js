@@ -13,10 +13,10 @@ const ReactComponentPropType = PropTypes.oneOfType([
   })
 ])
 
-const filterProps = (filter, tagName, props, isCustomFilter = false) => {
-  if (tagName == null && isCustomFilter === false) return props
-  return filterObj((propName) => filter(tagName, propName), props)
-}
+const filterProps = (filter, tagName, props) => filterObj(
+  (propName) => filter(tagName, propName),
+  props
+)
 
 const getDisplayName = (comp) =>
   (isStr(comp) ? comp : comp.displayName) || 'Component'
@@ -26,19 +26,18 @@ export function createBaseFactory (createFilter) {
     const {
       componentProp = DEFAULT_PROP_NAME,
       tagName: compTagName,
-      whitelist,
-      blacklist,
-      isPropValid: customFilter
+      isPropValid: customFilter,
+      ...filterOptions
     } = options
 
     const isCustomFilter = isFn(customFilter)
-    const filter = isCustomFilter ? customFilter : createFilter({ whitelist, blacklist })
+    const filter = isCustomFilter ? customFilter : createFilter(filterOptions)
 
     function BaseComponent ({ [componentProp]: Comp, ...rest }, ref) {
       const tagName = isStr(Comp) ? Comp : compTagName
 
       return (
-        <Comp ref={ref} {...filterProps(filter, tagName, rest, isCustomFilter)} />
+        <Comp ref={ref} {...filterProps(filter, tagName, rest)} />
       )
     }
 

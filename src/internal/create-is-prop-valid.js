@@ -7,7 +7,7 @@ export function createIsPropValid ({ whitelist = [], blacklist = [] } = {}) {
     whitelist.includes(propName) ||
     (!blacklist.includes(propName) && (
       isReactProp(propName) ||
-      isHtmlProp(propName, tagName)
+      (tagName == null || isHtmlProp(propName, tagName))
     ))
   )
 
