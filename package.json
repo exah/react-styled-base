@@ -59,6 +59,7 @@
   },
   "auto-changelog": {
     "commitLimit": 10,
+    "tagPattern": "\\d+\\.\\d+\\.\\d+$",
     "template": ".changelog.hbs"
   },
   "ava": {
