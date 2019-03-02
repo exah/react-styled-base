@@ -4,11 +4,9 @@
 
 
 - [x] Filter unknown props from DOM
-- [x] Based on [`react-html-attributes`](https://www.npmjs.com/package/react-html-attributes) (50% smaller - 3kb when minified /  1kb gziped, without many svg attributes and event handlers)
+- [x] Based on [`react-html-attributes`](https://www.npmjs.com/package/react-html-attributes) (50% smaller - 3kb when minified /  1kb gziped, without many deprecated attributes & elements)
 - [x] Override inner element with `as` prop
 - [x] Great for CSS-in-JS component libraries (NOTE: some provide this feature out of box!)
-- [ ] Remove old and deprecated html attributes (open for discussion)
-- [ ] Light version with only custom whitelist / blacklist (soon)
 
 
 ## 📦 Install
@@ -70,7 +68,6 @@ import { createBase } from 'react-styled-base'
     + `options.blacklist: Array` — List of props that always be be omitted (optional)
     + `options.isPropValid: function (tagName, propName) => boolean` — Custom function to filter props
     + `options.tagName: string` — DOM element. Used when `defaultComp` is not DOM element (optional)
-    + `options.componentProp: string` — Name of prop for changing underlying component (optional, default to `'as'`)
 
 **Return: `Component`** — wrapped in `React.forwardRef`.
 
@@ -128,8 +125,8 @@ import { isPropValid } from 'react-styled-base'
 
 #### Params
 
-- `tagName: string` — DOM element (like `a`, `input`, `div`)
 - `propName: string` — prop name (like `href`, `value`, `onChange`)
+- `tagName: string` — DOM element (like `a`, `input`, `div`)
 
 **Return: `boolean`**
 
@@ -139,9 +136,9 @@ import { isPropValid } from 'react-styled-base'
 ```js
 import { isPropValid } from 'react-styled-base'
 
-isPropValid('a', 'foo') // → false
-isPropValid('a', 'bar') // → false
-isPropValid('a', 'href') // → true
+isPropValid('foo', 'a') // → false
+isPropValid('bar', 'a') // → false
+isPropValid('href', 'a') // → true
 ```
 
 ## 💁‍♂️ Alternative

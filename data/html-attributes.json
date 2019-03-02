@@ -1,26 +1,19 @@
 {
   "*": [
-    "about",
-    "acceptCharset",
     "accessKey",
-    "allowFullScreen",
-    "allowTransparency",
     "autoComplete",
     "autoFocus",
     "autoPlay",
     "capture",
-    "cellPadding",
-    "cellSpacing",
     "charSet",
-    "classID",
     "className",
     "colSpan",
     "contentEditable",
     "contextMenu",
     "crossOrigin",
-    "datatype",
     "dateTime",
     "dir",
+    "disabled",
     "draggable",
     "encType",
     "formAction",
@@ -28,14 +21,11 @@
     "formMethod",
     "formNoValidate",
     "formTarget",
-    "frameBorder",
     "hidden",
     "hrefLang",
     "htmlFor",
     "httpEquiv",
-    "icon",
     "id",
-    "inlist",
     "inputMode",
     "is",
     "itemID",
@@ -43,25 +33,14 @@
     "itemRef",
     "itemScope",
     "itemType",
-    "keyParams",
-    "keyType",
     "lang",
-    "marginHeight",
-    "marginWidth",
-    "maxLength",
     "mediaGroup",
-    "minLength",
+    "name",
     "noValidate",
-    "prefix",
-    "property",
-    "radioGroup",
     "readOnly",
-    "resource",
     "role",
     "rowSpan",
-    "scoped",
-    "seamless",
-    "security",
+    "slot",
     "spellCheck",
     "srcDoc",
     "srcLang",
@@ -69,33 +48,9 @@
     "style",
     "tabIndex",
     "title",
-    "typeof",
-    "unselectable",
-    "useMap",
-    "vocab",
-    "wmode"
+    "useMap"
   ],
   "a": [
-    "coords",
-    "download",
-    "href",
-    "name",
-    "rel",
-    "shape",
-    "target",
-    "type"
-  ],
-  "abbr": [
-    "title"
-  ],
-  "applet": [
-    "alt",
-    "height",
-    "name",
-    "width"
-  ],
-  "area": [
-    "alt",
     "coords",
     "download",
     "href",
@@ -111,23 +66,11 @@
     "preload",
     "src"
   ],
-  "base": [
-    "href",
-    "target"
-  ],
-  "basefont": [
-    "size"
-  ],
-  "bdo": [
-    "dir"
-  ],
   "blockquote": [
     "cite"
   ],
   "button": [
-    "disabled",
     "form",
-    "name",
     "type",
     "value"
   ],
@@ -136,10 +79,6 @@
     "width"
   ],
   "col": [
-    "span",
-    "width"
-  ],
-  "colgroup": [
     "span",
     "width"
   ],
@@ -152,9 +91,6 @@
   "details": [
     "open"
   ],
-  "dfn": [
-    "title"
-  ],
   "dialog": [
     "open"
   ],
@@ -165,31 +101,14 @@
     "width"
   ],
   "fieldset": [
-    "disabled",
-    "form",
-    "name"
-  ],
-  "font": [
-    "size"
+    "form"
   ],
   "form": [
     "accept",
+    "acceptCharset",
     "action",
     "method",
-    "name",
     "target"
-  ],
-  "frame": [
-    "name",
-    "scrolling",
-    "src"
-  ],
-  "frameset": [
-    "cols",
-    "rows"
-  ],
-  "head": [
-    "profile"
   ],
   "hr": [
     "size",
@@ -200,7 +119,6 @@
   ],
   "iframe": [
     "height",
-    "name",
     "sandbox",
     "scrolling",
     "src",
@@ -209,7 +127,6 @@
   "img": [
     "alt",
     "height",
-    "name",
     "sizes",
     "src",
     "width"
@@ -223,14 +140,12 @@
     "checked",
     "defaultChecked",
     "defaultValue",
-    "disabled",
     "form",
     "height",
     "list",
     "max",
     "min",
     "multiple",
-    "name",
     "pattern",
     "placeholder",
     "required",
@@ -246,38 +161,12 @@
   "ins": [
     "cite"
   ],
-  "keygen": [
-    "challenge",
-    "disabled",
-    "form",
-    "name"
-  ],
   "label": [
     "form"
   ],
   "li": [
     "type",
     "value"
-  ],
-  "link": [
-    "color",
-    "href",
-    "integrity",
-    "media",
-    "nonce",
-    "rel",
-    "scope",
-    "sizes",
-    "target",
-    "title",
-    "type"
-  ],
-  "map": [
-    "name"
-  ],
-  "meta": [
-    "content",
-    "name"
   ],
   "meter": [
     "high",
@@ -291,7 +180,6 @@
     "data",
     "form",
     "height",
-    "name",
     "type",
     "width"
   ],
@@ -300,24 +188,8 @@
     "start",
     "type"
   ],
-  "optgroup": [
-    "disabled",
-    "label"
-  ],
-  "option": [
-    "disabled",
-    "label",
-    "selected",
-    "value"
-  ],
   "output": [
-    "form",
-    "name"
-  ],
-  "param": [
-    "name",
-    "type",
-    "value"
+    "form"
   ],
   "pre": [
     "width"
@@ -329,38 +201,13 @@
   "q": [
     "cite"
   ],
-  "script": [
-    "async",
-    "defer",
-    "integrity",
-    "nonce",
-    "src",
-    "type"
-  ],
   "select": [
     "defaultValue",
-    "disabled",
     "form",
     "multiple",
-    "name",
     "required",
     "size",
     "value"
-  ],
-  "slot": [
-    "name"
-  ],
-  "source": [
-    "media",
-    "sizes",
-    "src",
-    "type"
-  ],
-  "style": [
-    "media",
-    "nonce",
-    "title",
-    "type"
   ],
   "table": [
     "summary",
@@ -377,9 +224,9 @@
     "autoCorrect",
     "cols",
     "defaultValue",
-    "disabled",
     "form",
-    "name",
+    "maxLength",
+    "minLength",
     "placeholder",
     "required",
     "rows",
@@ -391,15 +238,6 @@
     "height",
     "scope",
     "width"
-  ],
-  "track": [
-    "default",
-    "kind",
-    "label",
-    "src"
-  ],
-  "ul": [
-    "type"
   ],
   "video": [
     "controls",

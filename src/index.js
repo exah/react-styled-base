@@ -6,4 +6,8 @@ export {
 
 export {
   isPropValid
-} from './is-prop-valid'
+} from './internal/is-prop-valid'
+
+export {
+  createBaseFactory
+} from './internal/create-base-factory'

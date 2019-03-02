@@ -2,7 +2,7 @@ import test from 'ava'
 import React from 'react'
 import { shallow, configure } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
-import { Base, createBase, isPropValid } from '../src'
+import { Base, createBase, isPropValid, createBaseFactory } from '../src'
 
 configure({ adapter: new Adapter() })
 
@@ -58,8 +58,8 @@ test('override tag name for custom components', t => {
 })
 
 test('multiple calls to isPropValid are memoized', t => {
-  t.true(isPropValid('a', 'href'))
-  t.true(isPropValid('a', 'href'))
+  t.true(isPropValid('href', 'a'))
+  t.true(isPropValid('href', 'a'))
 })
 
 test('do not filter props for custom components', t => {
@@ -84,7 +84,7 @@ test('createBase inside `as` prop', t => {
 
 test('custom filter inside createBase ', t => {
   const Comp = createBase((props) => <span {...props} />, {
-    isPropValid: (tag, prop) => prop !== 'foo'
+    isPropValid: (prop, tag) => prop !== 'foo'
   })
 
   const tree = shallow(
@@ -102,4 +102,29 @@ test('blacklist ', t => {
   )
 
   t.is(tree.html(), '<img/>')
+})
+
+const lightBase = createBaseFactory()
+
+test('blacklist without isPropValid', (t) => {
+  const Comp = lightBase('img', { blacklist: [ 'width' ] })
+  const ExtendedComp = lightBase(Comp, { blacklist: [ 'height' ] })
+
+  const tree = shallow(
+    <Comp width={1 / 2} height='auto' />
+  )
+
+  t.is(tree.html(), '<img height="auto"/>')
+
+  const extendedTree = shallow(
+    <ExtendedComp width={1 / 2} height='auto' src='foo' />
+  )
+
+  t.is(extendedTree.html(), '<img src="foo"/>')
+
+  const treeAs = shallow(
+    <ExtendedComp as='img' width={1 / 2} height='auto' src='foo' />
+  )
+
+  t.is(treeAs.html(), '<img src="foo"/>')
 })
