@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { isStr, isFn, filterObj } from '@exah/utils'
+import { isStr, isFn, filterObj, always } from '@exah/utils'
 import { DEFAULT_ELEMENT, DEFAULT_PROP_NAME } from './constants'
 
 const filterProps = (fn, tagName, props) => filterObj(
@@ -11,23 +11,28 @@ const filterProps = (fn, tagName, props) => filterObj(
 const getDisplayName = (comp) =>
   (isStr(comp) ? comp : (comp.displayName || comp.name || 'Component'))
 
-export function createBaseFactory (createFilter) {
+export function createBaseFactory ({
+  createFilter,
+  filter = always(true),
+  componentProp = DEFAULT_PROP_NAME
+} = {}) {
+  if (isFn(filter) === false) {
+    throw new TypeError('filter must be a function')
+  }
+
   return function createBase (defaultComp = DEFAULT_ELEMENT, options = {}) {
     const {
-      componentProp = DEFAULT_PROP_NAME,
-      tagName: compTagName,
-      isPropValid: customFilter,
-      ...filterOptions
+      blacklist,
+      whitelist,
+      isPropValid = isFn(createFilter) ? createFilter({ whitelist, blacklist }) : filter,
+      tagName: defaultCompTagName
     } = options
 
-    const isCustomFilter = isFn(customFilter)
-    const filter = isCustomFilter ? customFilter : createFilter(filterOptions)
-
     function BaseComponent ({ [componentProp]: Comp, ...rest }, ref) {
-      const tagName = isStr(Comp) ? Comp : compTagName
+      const tagName = isStr(Comp) ? Comp : (Comp === defaultComp ? defaultCompTagName : null)
 
       return (
-        <Comp ref={ref} {...filterProps(filter, tagName, rest)} />
+        <Comp ref={ref} {...filterProps(isPropValid, tagName, rest)} />
       )
     }
 
