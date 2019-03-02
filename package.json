@@ -29,7 +29,7 @@
     "test": "run-s test:*",
     "test:unit": "ava test",
     "test:lint": "eslint src test",
-    "deploy": "np --no-cleanup",
+    "release": "np --no-cleanup",
     "cleanup": "rimraf cjs esm dist",
     "version": "auto-changelog -p && git add CHANGELOG.md",
     "preversion": "npm run build",
