@@ -9,7 +9,7 @@ const filterProps = (filter, tagName, props) => filterObj(
 )
 
 const getDisplayName = (comp) =>
-  (isStr(comp) ? comp : comp.displayName) || 'Component'
+  (isStr(comp) ? comp : (comp.displayName || comp.name || 'Component'))
 
 export function createBaseFactory (createFilter) {
   return function createBase (defaultComp = DEFAULT_ELEMENT, options = {}) {
