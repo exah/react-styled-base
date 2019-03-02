@@ -66,10 +66,6 @@
     "preload",
     "src"
   ],
-  "base": [
-    "href",
-    "target"
-  ],
   "blockquote": [
     "cite"
   ],
@@ -83,10 +79,6 @@
     "width"
   ],
   "col": [
-    "span",
-    "width"
-  ],
-  "colgroup": [
     "span",
     "width"
   ],
@@ -176,19 +168,6 @@
     "type",
     "value"
   ],
-  "link": [
-    "color",
-    "href",
-    "integrity",
-    "media",
-    "nonce",
-    "rel",
-    "scope",
-    "sizes",
-    "target",
-    "title",
-    "type"
-  ],
   "meter": [
     "high",
     "low",
@@ -209,20 +188,8 @@
     "start",
     "type"
   ],
-  "optgroup": [
-    "label"
-  ],
-  "option": [
-    "label",
-    "selected",
-    "value"
-  ],
   "output": [
     "form"
-  ],
-  "param": [
-    "type",
-    "value"
   ],
   "pre": [
     "width"
@@ -234,14 +201,6 @@
   "q": [
     "cite"
   ],
-  "script": [
-    "async",
-    "defer",
-    "integrity",
-    "nonce",
-    "src",
-    "type"
-  ],
   "select": [
     "defaultValue",
     "form",
@@ -249,18 +208,6 @@
     "required",
     "size",
     "value"
-  ],
-  "source": [
-    "media",
-    "sizes",
-    "src",
-    "type"
-  ],
-  "style": [
-    "media",
-    "nonce",
-    "title",
-    "type"
   ],
   "table": [
     "summary",
@@ -291,12 +238,6 @@
     "height",
     "scope",
     "width"
-  ],
-  "track": [
-    "default",
-    "kind",
-    "label",
-    "src"
   ],
   "video": [
     "controls",
