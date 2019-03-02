@@ -16,10 +16,6 @@ export function createBaseFactory ({
   filter = always(true),
   componentProp = DEFAULT_PROP_NAME
 } = {}) {
-  if (isFn(filter) === false) {
-    throw new TypeError('filter must be a function')
-  }
-
   return function createBase (defaultComp = DEFAULT_ELEMENT, options = {}) {
     const {
       blacklist,

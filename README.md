@@ -4,10 +4,9 @@
 
 
 - [x] Filter unknown props from DOM
-- [x] Based on [`react-html-attributes`](https://www.npmjs.com/package/react-html-attributes) (50% smaller - 3kb when minified /  1kb gziped, without many svg attributes and event handlers)
+- [x] Based on [`react-html-attributes`](https://www.npmjs.com/package/react-html-attributes) (50% smaller - 3kb when minified /  1kb gziped, without many deprecated attributes & elements)
 - [x] Override inner element with `as` prop
 - [x] Great for CSS-in-JS component libraries (NOTE: some provide this feature out of box!)
-- [ ] Remove old and deprecated html attributes (open for discussion)
 - [ ] Light version with only custom whitelist / blacklist (soon)
 
 
