@@ -3,16 +3,6 @@ import PropTypes from 'prop-types'
 import { isStr, isFn, filterObj } from '@exah/utils'
 import { DEFAULT_ELEMENT, DEFAULT_PROP_NAME } from './constants'
 
-const ReactComponentPropType = PropTypes.oneOfType([
-  PropTypes.string,
-  PropTypes.func,
-  // Special react hocs: `forwardRef`, `memo`
-  PropTypes.shape({
-    $$typeof: PropTypes.symbol.isRequired,
-    render: PropTypes.func.isRequired
-  })
-])
-
 const filterProps = (filter, tagName, props) => filterObj(
   (propName) => filter(tagName, propName),
   props
@@ -47,7 +37,7 @@ export function createBaseFactory (createFilter) {
         [componentProp]: defaultComp
       },
       propTypes: {
-        [componentProp]: ReactComponentPropType
+        [componentProp]: PropTypes.elementType
       }
     })
   }
