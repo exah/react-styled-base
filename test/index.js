@@ -108,10 +108,23 @@ const lightBase = createBaseFactory()
 
 test('blacklist without isPropValid', (t) => {
   const Comp = lightBase('img', { blacklist: [ 'width' ] })
+  const ExtendedComp = lightBase(Comp, { blacklist: [ 'height' ] })
 
   const tree = shallow(
     <Comp width={1 / 2} height='auto' />
   )
 
   t.is(tree.html(), '<img height="auto"/>')
+
+  const extendedTree = shallow(
+    <ExtendedComp width={1 / 2} height='auto' src='foo' />
+  )
+
+  t.is(extendedTree.html(), '<img src="foo"/>')
+
+  const treeAs = shallow(
+    <ExtendedComp as='img' width={1 / 2} height='auto' src='foo' />
+  )
+
+  t.is(treeAs.html(), '<img src="foo"/>')
 })
