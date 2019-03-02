@@ -2,7 +2,7 @@ import test from 'ava'
 import React from 'react'
 import { shallow, configure } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
-import { Base, createBase, isPropValid } from '../src'
+import { Base, createBase, isPropValid, createBaseFactory } from '../src'
 
 configure({ adapter: new Adapter() })
 
@@ -102,4 +102,16 @@ test('blacklist ', t => {
   )
 
   t.is(tree.html(), '<img/>')
+})
+
+const lightBase = createBaseFactory()
+
+test('blacklist without isPropValid', (t) => {
+  const Comp = lightBase('img', { blacklist: [ 'width' ] })
+
+  const tree = shallow(
+    <Comp width={1 / 2} height='auto' />
+  )
+
+  t.is(tree.html(), '<img height="auto"/>')
 })
