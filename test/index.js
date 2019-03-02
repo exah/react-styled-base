@@ -58,8 +58,8 @@ test('override tag name for custom components', t => {
 })
 
 test('multiple calls to isPropValid are memoized', t => {
-  t.true(isPropValid('a', 'href'))
-  t.true(isPropValid('a', 'href'))
+  t.true(isPropValid('href', 'a'))
+  t.true(isPropValid('href', 'a'))
 })
 
 test('do not filter props for custom components', t => {
@@ -84,7 +84,7 @@ test('createBase inside `as` prop', t => {
 
 test('custom filter inside createBase ', t => {
   const Comp = createBase((props) => <span {...props} />, {
-    isPropValid: (tag, prop) => prop !== 'foo'
+    isPropValid: (prop, tag) => prop !== 'foo'
   })
 
   const tree = shallow(

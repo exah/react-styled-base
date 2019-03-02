@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import { isStr, isFn, filterObj } from '@exah/utils'
 import { DEFAULT_ELEMENT, DEFAULT_PROP_NAME } from './constants'
 
-const filterProps = (filter, tagName, props) => filterObj(
-  (propName) => filter(tagName, propName),
+const filterProps = (fn, tagName, props) => filterObj(
+  (propName) => fn(propName, tagName),
   props
 )
 
